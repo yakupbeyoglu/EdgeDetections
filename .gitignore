@@ -30,3 +30,15 @@
 *.exe
 *.out
 *.app
+
+# Build & bin directory
+Bin/
+bin/
+build/
+Build/
+
+
+# Kde files
+.kdev4/
+*.kdev4
+
