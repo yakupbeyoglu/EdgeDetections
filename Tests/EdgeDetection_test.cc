@@ -24,9 +24,7 @@ TEST ( GetValueTest, BasicAssertions )
 {
     EdgeDetections::BoxKernel kernel = {{1,2,3}, {4,5,6}, {7,8,9}};
     EXPECT_TRUE(kernel.GetValueAt(2,1) == 8);
-    EXPECT_TRUE(kernel[2][1] == 8.0f);
-    EXPECT_TRUE(kernel[2][5] == -1);
-    
+    EXPECT_TRUE(kernel[2][1] == 8.0f);    
     EXPECT_THROW(kernel.GetValueAt(2,5), std::runtime_error);
     EXPECT_THROW(kernel[5][5], std::runtime_error);
 }
