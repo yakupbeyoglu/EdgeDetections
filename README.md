@@ -2,7 +2,7 @@
 This repository includes several edge detection algorithms
 
 # Dependencies
-- [Gorgon Game engine](http://repo.darkgaze.org/Gorgon)
+- [Gorgon](http://repo.darkgaze.org/Gorgon) (For graphic & imageprocessing)
 
 # Build & Run
 ```
