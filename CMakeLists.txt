@@ -1,8 +1,8 @@
-cmake_minimum_required(VERSION 2.8)
-cmake_policy(SET CMP0054 NEW)
+cmake_minimum_required(VERSION 3.12)
+cmake_policy(VERSION 3.12)
+set(CMAKE_CXX_STANDARD 17 CACHE STRING "C++ standard")
 
 set(PROJECT_NAME "EdgeDetections")
-set(CMAKE_CXX_STANDARD 17)
 
 project(${PROJECT_NAME})
 
@@ -23,7 +23,7 @@ add_executable(${PROJECT_NAME}
 linkgorgon(${PROJECT_NAME})
 
 install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION bin)
-add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/Source/)
+include_directories(${CMAKE_CURRENT_LIST_DIR}/Source/)
 add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/Tests/)
 
 

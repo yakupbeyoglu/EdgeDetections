@@ -9,14 +9,14 @@ FetchContent_MakeAvailable(googletest)
 
 enable_testing()
 set(files
-   # ${CMAKE_CURRENT_BINARY_DIR}/../Source/Processing/**.cpp
+   ${CMAKE_CURRENT_SOURCE_DIR}/../Source/BoxKernel.h
 
 )
 
 add_executable(
   EdgeDetectionTest
   EdgeDetection_test.cc
-#  ${CMAKE_CURRENT_SOURCE_DIR}/../Source/Processing/**.cpp                            
+   ${CMAKE_CURRENT_SOURCE_DIR}/../Source/BoxKernel.h
 
 )
 

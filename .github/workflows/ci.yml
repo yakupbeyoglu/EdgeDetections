@@ -1,0 +1,67 @@
+name: Edge Detection
+on:
+  push:
+    branches-ignore:
+      - "hotfix.*"
+      - "wip.*"
+jobs:
+  release:
+    name: CI
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+          
+      - name: Update resources
+        run: |
+          sudo apt-get update -y
+      
+      - name: Add g++ 10 for c++ 17 support
+        run: |
+          sudo apt install gcc-10 g++-10
+          sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-10 100 --slave /usr/bin/g++ g++ /usr/bin/g++-10 --slave /usr/bin/gcov gcov /usr/bin/gcov-10
+          sudo update-alternatives --set gcc /usr/bin/gcc-10
+      
+      - name: Build gorgon dependencies
+        run: |
+          sudo apt-get install -y gcc cmake cmake-gui libgl1-mesa-dev libx11-dev libxinerama-dev libxrandr-dev libxtst-dev doxygen freetype2-demos libfifechan-dev libfreetype6-dev libpulse-dev libfontconfig1-dev libflac-dev libvorbis-dev
+          sudo apt-get install -y ssh mercurial 
+      # Cache Gorgon 
+      - name: Gorgon
+        id: cache_gorgon
+        uses: actions/cache@v3
+        with:
+          path: '${{github.workspace}}/Gorgon'
+          key: '${{runner.os}}_gorgon'
+        
+      - name: Gorgon Install
+        if: ${{ steps.cache_gorgon.outputs.cache-hit != 'true'}}
+        run: |
+          hg clone https://repo.darkgaze.org/Gorgon/
+          cd Gorgon/
+          hg checkout 4.x-dev
+          mkdir build
+          cd build 
+          cmake ..
+          make -j8
+        
+      - name: Link gorgon
+        run: |
+          cd Gorgon/build
+          sudo cmake --install .
+      - name: Create executable
+        working-directory: .
+        run: |
+          sudo cmake  -Bbuild -DCMAKE_BUILD_TYPE=Release
+          sudo make -j8 -C build
+      
+      - name: Run ctest
+        working-directory: ./build
+        run: |
+          sudo ctest --verbose
