@@ -44,3 +44,6 @@ Build/
 
 # vscode files
 *.vscode/
+
+# Testing directory
+Testing/

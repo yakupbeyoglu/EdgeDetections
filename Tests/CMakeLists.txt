@@ -14,19 +14,19 @@ set(files
 )
 
 add_executable(
-  CornerDetectionTest
-  CornerDetection_test.cc
+  EdgeDetectionTest
+  EdgeDetection_test.cc
 #  ${CMAKE_CURRENT_SOURCE_DIR}/../Source/Processing/**.cpp                            
 
 )
 
 target_link_libraries(
-    CornerDetectionTest
+    EdgeDetectionTest
   GTest::gtest_main
 )
 
 include(GoogleTest)
-gtest_discover_tests(CornerDetectionTest)
-linkgorgon(CornerDetectionTest)
+gtest_discover_tests(EdgeDetectionTest)
+linkgorgon(EdgeDetectionTest)
 
 link_directories(${CMAKE_CURRENT_LIST_DIR}/../Source/)
