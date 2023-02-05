@@ -38,7 +38,9 @@ build/
 Build/
 
 
-# Kde files
+# Kdev files
 .kdev4/
 *.kdev4
 
+# vscode files
+*.vscode/
