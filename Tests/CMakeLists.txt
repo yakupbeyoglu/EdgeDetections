@@ -16,12 +16,10 @@ set(files
 add_executable(
   EdgeDetectionTest
   EdgeDetection_test.cc
-   ${CMAKE_CURRENT_SOURCE_DIR}/../Source/BoxKernel.h
-
 )
 
 target_link_libraries(
-    EdgeDetectionTest
+  EdgeDetectionTest
   GTest::gtest_main
 )
 

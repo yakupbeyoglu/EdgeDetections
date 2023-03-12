@@ -1,3 +1,3 @@
 set(Local
-    BoxKernel.h
+    Sobel.h
 )

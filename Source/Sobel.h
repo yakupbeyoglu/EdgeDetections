@@ -7,7 +7,7 @@ namespace EdgeDetections {
 class BoxKernel {
 public:
 
-    BoxKernel(const std::initializer_list<std::initializer_list<double>> &t_kernel) {
+    BoxKernel(const std::initializer_list<double> &t_kernel) {
         CheckKernel(t_kernel);
         std::copy(t_kernel.begin(), t_kernel.end(), std::back_inserter(kernel));
     }
@@ -21,7 +21,7 @@ public:
     // Delete move constructor
     BoxKernel (BoxKernel &&) = delete;
     void operator  = (BoxKernel &&)  = delete;
-    
+
     BoxKernel &operator = (const std::initializer_list<std::initializer_list<double>> &t_kernel) {
         CheckKernel(t_kernel);
         std::copy(t_kernel.begin(), t_kernel.end(), std::back_inserter(kernel));
@@ -31,19 +31,19 @@ public:
     const std::vector<std::vector<double>> &GetKernel()const {
         return kernel;
     }
-    
-    double GetValueAt(const int row, const int column) {
+
+    double GetValueAt(std::size_t row, std::size_t column) {
         if(row < 0 || column < 0  || column >= kernel.size() || row >= kernel.size())
             throw std::runtime_error("Out of bounds !");
         return kernel[row][column];
     }
-    
-    std::vector<double> &operator [](int index){
+
+    std::vector<double> &operator [](int index) {
         if(index < 0 ||  index >= kernel.size())
             throw std::runtime_error("Out of bounds !");
         return kernel[index];
     }
-    
+
     double GetTotal()const {
         return std::accumulate(kernel.begin(), kernel.end(), 0.0f, [](auto total, const auto &right) {
             return std::accumulate(right.begin(), right.end(), total);
