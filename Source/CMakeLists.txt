@@ -1,3 +1,5 @@
 set(Local
-    Sobel.h
+    Base.h
+    Process.hpp
+    Sobel.hpp
 )
